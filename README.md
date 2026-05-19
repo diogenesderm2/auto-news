@@ -1,27 +1,49 @@
-# Laravel + Vue Starter Kit
+# Auto News
 
-## Introduction
+Blog sobre carros elétricos e mobilidade, inspirado no estilo InsideEVs, com identidade visual vermelho, branco e preto.
 
-Our Vue starter kit provides a robust, modern starting point for building Laravel applications with a Vue frontend using [Inertia](https://inertiajs.com).
+## Stack
 
-Inertia allows you to build modern, single-page Vue applications using classic server-side routing and controllers. This lets you enjoy the frontend power of Vue combined with the incredible backend productivity of Laravel and lightning-fast Vite compilation.
+- Laravel 13
+- Inertia.js v3 + Vue 3
+- Tailwind CSS v4
+- Laravel Fortify (autenticação)
 
-This Vue starter kit utilizes Vue 3 and the Composition API, TypeScript, Tailwind, and the [shadcn-vue](https://www.shadcn-vue.com) component library.
+## Funcionalidades
 
-## Official Documentation
+- Blog público com home, categorias e páginas de notícias
+- Painel admin para CRUD de posts
+- Rascunhos, publicados e lixeira (soft delete) no estilo WordPress
+- Cache do blog e dashboard com estatísticas
 
-Documentation for all Laravel starter kits can be found on the [Laravel website](https://laravel.com/docs/starter-kits).
+## Instalação local
 
-## Contributing
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm install
+npm run build
+```
 
-Thank you for considering contributing to our starter kit! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Com [Laravel Herd](https://herd.laravel.com/), o site fica disponível em `https://auto-news.test`.
 
-All contributions to the Starter Kits from now on should be made through [Maestro](https://github.com/laravel/maestro).
+## Desenvolvimento
 
-## Code of Conduct
+```bash
+composer run dev
+# ou separadamente:
+php artisan serve
+npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Testes
 
-## License
+```bash
+php artisan test
+```
 
-The Laravel + Vue starter kit is open-sourced software licensed under the MIT license.
+## Licença
+
+MIT
