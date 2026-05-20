@@ -46,6 +46,34 @@ class HandleInertiaRequests extends Middleware
             'blogCategories' => fn () => $request->routeIs('home', 'posts.show', 'categories.show')
                 ? app(BlogCacheService::class)->categoriesNav()
                 : [],
+            'blogAds' => fn () => $request->routeIs('home', 'posts.show', 'categories.show')
+                ? $this->blogAdsConfig()
+                : null,
+        ];
+    }
+
+    /**
+     * @return array{enabled: bool, client: string|null, slots: array<string, string|null>}|null
+     */
+    private function blogAdsConfig(): ?array
+    {
+        $client = config('blog.adsense.client');
+
+        if (! config('blog.adsense.enabled') || ! is_string($client) || $client === '') {
+            return [
+                'enabled' => false,
+                'client' => null,
+                'slots' => [],
+            ];
+        }
+
+        /** @var array<string, string|null> $slots */
+        $slots = config('blog.adsense.slots', []);
+
+        return [
+            'enabled' => true,
+            'client' => $client,
+            'slots' => $slots,
         ];
     }
 }

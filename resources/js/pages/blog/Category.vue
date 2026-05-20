@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import AdSlot from '@/components/blog/AdSlot.vue';
 import PostCard from '@/components/blog/PostCard.vue';
 import BlogLayout from '@/layouts/blog/BlogLayout.vue';
 import { postsList } from '@/lib/blogPosts';
@@ -31,13 +32,25 @@ const categoryPosts = computed(() => postsList(props.posts));
         </section>
 
         <section class="mx-auto max-w-7xl px-4 py-10 md:px-6">
+            <AdSlot
+                placement="category_top"
+                format="horizontal"
+                class="mb-8"
+            />
+
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <PostCard
-                    v-for="post in categoryPosts"
+                <template
+                    v-for="(post, index) in categoryPosts"
                     :key="post.id"
-                    :post="post"
-                    variant="vertical"
-                />
+                >
+                    <AdSlot
+                        v-if="index === 6"
+                        placement="category_in_feed"
+                        format="rectangle"
+                        class="md:col-span-2 lg:col-span-3"
+                    />
+                    <PostCard :post="post" variant="vertical" />
+                </template>
             </div>
 
             <div

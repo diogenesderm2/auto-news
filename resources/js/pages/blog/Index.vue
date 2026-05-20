@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import AdSlot from '@/components/blog/AdSlot.vue';
 import PostCard from '@/components/blog/PostCard.vue';
 import SectionTitle from '@/components/blog/SectionTitle.vue';
 import BlogLayout from '@/layouts/blog/BlogLayout.vue';
@@ -72,15 +73,22 @@ const moreNewsPosts = computed(() => postsList(props.moreNews));
             <div class="grid gap-10 lg:grid-cols-[1fr_340px]">
                 <div>
                     <SectionTitle title="Últimas notícias" />
-                    <PostCard
-                        v-for="post in latestPosts"
+                    <template
+                        v-for="(post, index) in latestPosts"
                         :key="post.id"
-                        :post="post"
-                        variant="horizontal"
-                    />
+                    >
+                        <AdSlot
+                            v-if="index === 3"
+                            placement="home_in_feed"
+                            format="horizontal"
+                            class="my-2"
+                        />
+                        <PostCard :post="post" variant="horizontal" />
+                    </template>
                 </div>
 
-                <aside class="lg:sticky lg:top-4 lg:self-start">
+                <aside class="space-y-6 lg:sticky lg:top-4 lg:self-start">
+                    <AdSlot placement="home_sidebar" format="vertical" />
                     <SectionTitle title="Recomendados" />
                     <div class="space-y-4">
                         <PostCard
